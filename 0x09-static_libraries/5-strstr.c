@@ -1,32 +1,39 @@
 #include "main.h"
+
 /**
- *_strstr - The _strstr() function finds the first occurrence
- * of the substring needle in the string haystack.
- * The terminating null bytes (\0) are not compared
- *@haystack: string where the search is made
- *@needle: string whose occurence is searched in haystack
- *Return:Returns a pointer to the beginning of the located
- * substring, or NULL if the substring is not found.
+ * *_strstr - Entry point
+ * Description: Locates a substring
+ * @haystack: Character
+ * @needle: Character
+ * Return: char
  */
+
 char *_strstr(char *haystack, char *needle)
 {
-int i;
-if (*needle == 0)
-return (haystack);
-while (*haystack)
-{
-i = 0;
-if (haystack[i] == needle[i])
-{
-do
-{
-if (needle[i + 1] == '\0')
-return (haystack);
-i++;
-}
-while (haystack[i] == needle[i]);
-}
-haystack++;
-}
-return ('\0');
+	/* If the needle is an empty string, return the haystack */
+	if (*needle == '\0')
+	{
+		return (haystack);
+	}
+	/* Loop through the haystack string */
+	while (*haystack)
+	{
+		char *h = haystack;
+		char *n = needle;
+		/* While the current characters of haystack and needle match */
+		while (*n != '\0' && *h == *n)
+		{
+			h++;
+			n++;
+		}
+		/* If we reached the end of the needle, we found a match */
+		if (*n == '\0')
+		{
+			return (haystack);
+		}
+		/* If not found, keep searching */
+		haystack++;
+	}
+	/* If we reached the end of the haystack and no match, return \0 */
+	return ('\0');
 }
